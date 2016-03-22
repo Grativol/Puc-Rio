@@ -1,6 +1,6 @@
 
 // Variáveis API///////////////////////////////////////////////////////
-unsigned long timer1=0,timer2=0,timer1_marca=0,timer2_marca=0;
+unsigned long timer1=0,timer2=0,timer1_marca=0,timer2_marca=0; 
 unsigned long timer1_flag=0, timer2_flag=0;
 bool flag_button=0,flag_timer1=0,flag_timer2=0,flag=0;
 //////////////////////////////////////////////////////////////////////
