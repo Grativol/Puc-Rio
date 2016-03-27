@@ -1,0 +1,61 @@
+#define sensor_temp A0
+// por ordem de intensidade
+#define led_verde 2
+#define led_amarelo 3
+#define led_vermelho 4
+
+//temperatura para comparação
+#define temperatura_base 25
+
+unsigned long timer1, timer2 = 0;
+void setup()
+{
+  pinMode(led_verde, OUTPUT);
+  pinMode(led_amarelo, OUTPUT);
+  pinMode(led_vermelho, OUTPUT);
+}
+
+void loop()
+{
+
+  timer1 = millis();
+
+  if (timer1 - timer2 == 2500)
+  {
+    float data = analogRead(sensor_temp);
+    float temp = ((data * 5) / 1023.0) / 0.01; // conversão para  temperatura em celcius
+
+    if ( temp - temperatura_base <= 1 )
+    {
+      digitalWrite(led_verde, LOW);
+      digitalWrite(led_amarelo, LOW);
+      digitalWrite(led_vermelho, LOW);
+    }
+    else
+    {
+      if ( temp - temperatura_base <= 3 )
+      {
+        digitalWrite(led_verde, HIGH);
+        digitalWrite(led_amarelo, LOW);
+        digitalWrite(led_vermelho, LOW);
+      }
+      else
+      {
+        if ( temp - temperatura_base <= 5 )
+        {
+          digitalWrite(led_verde, HIGH);
+          digitalWrite(led_amarelo, HIGH);
+          digitalWrite(led_vermelho, LOW);
+        }
+        else
+        {
+          digitalWrite(led_verde, HIGH);
+          digitalWrite(led_amarelo, HIGH);
+          digitalWrite(led_vermelho, HIGH);
+        }
+      }
+    }
+
+    timer2 = timer1;
+  }
+}
